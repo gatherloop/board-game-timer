@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gatherloop Board Game Timer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="m-5 flex gap-4 flex-wrap justify-center">
+      {{#each tables}}
+
+      <div class="shadow-md rounded-lg overflow-hidden">
+        <div class="bg-blue-400 h-24"></div>
+        <div class="p-5 flex flex-col gap-4 items-center">
+          <h1 class="text-4xl">Meja {{ inc @index }}</h1>
+          <div class="flex gap-2 items-center">
+            <button
+              id="btnDecrease-{{ @index }}"
+              class="border border-gray-300 px-3 py-1 rounded-lg cursor-pointer"
+              onclick="decrease({{ @index }})"
+            >
+              -
+            </button>
+            <h2 class="text-5xl" id="timer-{{ @index }}">00:00:00</h2>
+            <button
+              id="btnIncrease-{{ @index }}"
+              class="border border-gray-300 px-3 py-1 rounded-lg cursor-pointer"
+              onclick="increase({{ @index }})"
+            >
+              +
+            </button>
+          </div>
+          <div class="flex gap-4">
+            <button
+              id="btnStart-{{ @index }}"
+              class="bg-green-500 text-white px-5 py-2 rounded-lg cursor-pointer"
+              onclick="start({{ @index }})"
+            >
+              Start
+            </button>
+
+            <button
+              id="btnPause-{{ @index }}"
+              class="bg-orange-500 text-white px-5 py-2 rounded-lg cursor-pointer hidden"
+              onclick="pause({{ @index }})"
+            >
+              Pause
+            </button>
+
+            <button
+              id="btnStop-{{ @index }}"
+              class="bg-red-400 text-white px-5 py-2 rounded-lg cursor-pointer hidden"
+              onclick="stop({{ @index }})"
+            >
+              Stop
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {{/each}}
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/index.js"></script>
+  </body>
+</html>
