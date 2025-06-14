@@ -66,11 +66,11 @@ io.on("connection", function (socket) {
   });
 
   socket.on("increase", function (index) {
-    tables[index].duration += 3600;
+    tables[index].duration += 600;
   });
 
   socket.on("decrease", function (index) {
-    tables[index].duration -= 3600;
+    tables[index].duration -= 600;
   });
 
   socket.on("pause", function (index) {
