@@ -7,13 +7,55 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <div class="m-5 flex gap-4 flex-wrap justify-center">
-      {{#each tables}}
+    <div class="m-5 flex gap-4 flex-wrap">
+      <div>
+        <form
+          method="post"
+          action="/"
+          class="inline-flex flex-col gap-3 items-start p-3 m-3 border border-gray-300 rounded-md"
+        >
+          <h1 class="text-xl">Tambah Transaksi</h1>
+          <label>Nama Transaksi</label>
+          <input
+            class="border border-gray-300 rounded-md p-2 min-w-2xs"
+            type="text"
+            name="name"
+            placeholder="Chiko"
+            required
+          />
+
+          <label>Paket Bermain</label>
+          <select
+            name="duration"
+            required
+            class="border border-gray-300 rounded-md p-2 min-w-2xs"
+          >
+            <option value="7200">Paket 2 Jam</option>
+            <option value="14400">Paket 4 Jam</option>
+            <option value="43200">Paket All Day</option>
+          </select>
+          <input
+            type="submit"
+            value="Submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md"
+          />
+        </form>
+      </div>
+
+      {{#each transactions}}
 
       <div class="shadow-md rounded-lg overflow-hidden">
-        <div class="bg-blue-400 h-24"></div>
+        <div class="p-3 flex justify-end">
+          <button
+            class="bg-red-400 text-white rounded-full cursor-pointer"
+            style="width: 25px; height: 25px"
+            onclick="deleteTransaction({{ @index }})"
+          >
+            x
+          </button>
+        </div>
         <div class="p-5 flex flex-col gap-4 items-center">
-          <h1 class="text-4xl">Meja {{ inc @index }}</h1>
+          <h1 class="text-4xl">{{ name }}</h1>
           <div class="flex gap-2 items-center">
             <button
               id="btnDecrease-{{ @index }}"
@@ -22,7 +64,9 @@
             >
               -
             </button>
-            <h2 class="text-5xl" id="timer-{{ @index }}">00:00:00</h2>
+            <h2 class="text-5xl" id="timer-{{ @index }}">
+              {{ getTimerText duration }}
+            </h2>
             <button
               id="btnIncrease-{{ @index }}"
               class="border border-gray-300 px-3 py-1 rounded-lg cursor-pointer"

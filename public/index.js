@@ -1,5 +1,11 @@
 const socket = io();
 
+function deleteTransaction(indexString) {
+  if (confirm("Are you sure want to delete ?")) {
+    window.location.href = `/delete?index=${indexString}`;
+  }
+}
+
 function start(indexString) {
   const index = parseInt(indexString);
   socket.emit("start", index);
